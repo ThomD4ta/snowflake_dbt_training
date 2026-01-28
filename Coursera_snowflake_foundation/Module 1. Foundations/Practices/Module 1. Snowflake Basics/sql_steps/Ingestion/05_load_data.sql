@@ -1,0 +1,3 @@
+-- 5. copy the Menu file into the Menu table
+COPY INTO DATAEXPERT_STUDENT.THOMRADAD4TA.SAMPLE_MENU
+FROM @DATAEXPERT_STUDENT.THOMRADAD4TA.blob_stage/raw_pos/menu/;

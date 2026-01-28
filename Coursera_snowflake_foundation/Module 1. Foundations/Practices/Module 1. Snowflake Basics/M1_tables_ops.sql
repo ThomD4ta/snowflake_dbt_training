@@ -1,0 +1,52 @@
+-- Role and environment
+USE ROLE ALL_USERS_ROLE; 
+USE DATABASE DATAEXPERT_STUDENT; 
+USE SCHEMA THOMRADAD4TA; 
+USE WAREHOUSE COMPUTE_WH;
+
+---> create a table – note that each column has a name and a data type
+CREATE OR REPLACE TABLE TEST_TABLE (
+    TEST_NUMBER NUMBER,
+    TEST_VARCHAR VARCHAR,
+    TEST_BOOLEAN BOOLEAN,
+    TEST_DATE DATE,
+    TEST_VARIANT VARIANT,
+    TEST_GEOGRAPHY GEOGRAPHY
+);
+
+SELECT * 
+FROM DATAEXPERT_STUDENT.THOMRADAD4TA.TEST_TABLE;
+
+---> insert a row into the table we just created
+INSERT INTO DATAEXPERT_STUDENT.THOMRADAD4TA.TEST_TABLE
+VALUES (28, 'ha!', TRUE, '2024-01-01', NULL, NULL);
+
+SELECT * FROM DATAEXPERT_STUDENT.THOMRADAD4TA.TEST_TABLE;
+
+---> drop the test table
+DROP TABLE DATAEXPERT_STUDENT.THOMRADAD4TA.TEST_TABLE;
+
+---> see all tables in a particular schema
+SHOW TABLES IN SCHEMA DATAEXPERT_STUDENT.THOMRADAD4TA;
+
+---> undrop the test table
+UNDROP TABLE DATAEXPERT_STUDENT.THOMRADAD4TA.TEST_TABLE;
+
+SHOW TABLES IN SCHEMA DATAEXPERT_STUDENT.THOMRADAD4TA;
+
+---> see table storage metadata from the Snowflake database
+SELECT *
+FROM SNOWFLAKE.ACCOUNT_USAGE.TABLE_STORAGE_METRICS;
+
+---> here’s an example of table we created previously
+CREATE OR REPLACE TABLE DATAEXPERT_STUDENT.RAW_POS.ORDER_DETAIL (
+    order_detail_id NUMBER(38,0),
+    order_id NUMBER(38,0),
+    menu_item_id NUMBER(38,0),
+    discount_id VARCHAR(16777216),
+    line_number NUMBER(38,0),
+    quantity NUMBER(5,0),
+    unit_price NUMBER(38,4),
+    price NUMBER(38,4),
+    order_item_discount_amount VARCHAR(16777216)
+);
