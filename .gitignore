@@ -17,3 +17,12 @@ logs/
 .DS_Store
 Thumbs.db
 
+# Script de Auditoria Powershell
+Write-Host "===== ENV AUDIT ====="
+Write-Host "Python path:" (where python)
+Write-Host "Python version:" (python --version)
+Write-Host "VENV:" $env:VIRTUAL_ENV
+Write-Host "Packages:"
+pip list
+Write-Host "Dependency check:"
+pip check

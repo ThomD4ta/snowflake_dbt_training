@@ -1,0 +1,92 @@
+# =====================================================================
+# SCRIPT DE CARGA DESDE POWERSHELL PARA SNOWFLAKE CLI
+# Autor: Thomas
+# Descripción:
+#   Automatiza el flujo completo para cargar datos desde Cursor usando
+#   Snowflake CLI, incluyendo:
+#       0. Verificación de conexión
+#       1. Creación del stage (si no existe)
+#       2. Limpieza del stage
+#       3. Subida del archivo CSV a carpeta 'raw_data'
+#       4. Verificación del contenido del stage
+#       5. Ejecución del script SQL de carga
+# =====================================================================
+
+
+# ---------------------------------------------------------------------
+# 0. VERIFICAR CONEXIÓN DEL CLI A SNOWFLAKE
+# ---------------------------------------------------------------------
+# Esto confirma que el CLI está correctamente configurado y autenticado.
+# ---------------------------------------------------------------------
+
+Write-Host "Verificando conexión con Snowflake..." -ForegroundColor Cyan
+snow connection test
+
+
+# ---------------------------------------------------------------------
+# 1. CREAR EL STAGE SI NO EXISTE
+# ---------------------------------------------------------------------
+# IMPORTANTE:
+#   - Si el stage ya existe, Snowflake lo ignora sin error.
+#   - Esto garantiza que el flujo siempre pueda ejecutarse.
+# ---------------------------------------------------------------------
+
+Write-Host "Creando stage 'snowflake_cli_stage' si no existe..." -ForegroundColor Cyan
+snow stage create snowflake_cli_stage
+
+
+# ---------------------------------------------------------------------
+# 2. LIMPIAR EL STAGE COMPLETO
+# ---------------------------------------------------------------------
+# Esto elimina cualquier archivo previo dentro del stage para evitar
+# rutas duplicadas o subcarpetas inesperadas.
+# ---------------------------------------------------------------------
+
+Write-Host "Eliminando archivos previos del stage..." -ForegroundColor Cyan
+snow sql -q "REMOVE @snowflake_cli_stage;"
+
+
+# ---------------------------------------------------------------------
+# 3. SUBIR EL ARCHIVO CSV AL STAGE
+# ---------------------------------------------------------------------
+# IMPORTANTE:
+# - La ruta local debe ir entre comillas porque contiene espacios.
+# - El destino incluye una carpeta llamada 'raw_data' dentro del stage.
+# - Esto evita que Snowflake cree subcarpetas duplicadas.
+# ---------------------------------------------------------------------
+
+Write-Host "Subiendo archivo CSV al stage en carpeta 'raw_data'..." -ForegroundColor Cyan
+snow stage copy `
+"C:\Users\admin\Documents\.DataExpert.io Subscription 2025\Snowflake-dbt\modern-data-engineering-snowflake\module-2\sample_orders.csv" `
+@snowflake_cli_stage/raw_data/sample_orders.csv
+
+
+# ---------------------------------------------------------------------
+# 4. LISTAR ARCHIVOS DENTRO DEL STAGE
+# ---------------------------------------------------------------------
+# NOTA:
+#   Tu versión del CLI no soporta 'stage list-files', así que usamos SQL.
+# ---------------------------------------------------------------------
+
+Write-Host "Listando archivos dentro del stage..." -ForegroundColor Cyan
+snow sql -q "LIST @snowflake_cli_stage;"
+
+
+# ---------------------------------------------------------------------
+# 5. EJECUTAR EL SCRIPT SQL DE CARGA
+# ---------------------------------------------------------------------
+# Este script debe contener:
+#   - CREATE TABLE
+#   - CREATE FILE FORMAT
+#   - COPY INTO
+# ---------------------------------------------------------------------
+
+Write-Host "Ejecutando script SQL de carga..." -ForegroundColor Cyan
+snow sql -f load_from_cli_stage.sql
+
+
+# ---------------------------------------------------------------------
+# FIN DEL PROCESO
+# ---------------------------------------------------------------------
+
+Write-Host "Proceso completado exitosamente." -ForegroundColor Green
