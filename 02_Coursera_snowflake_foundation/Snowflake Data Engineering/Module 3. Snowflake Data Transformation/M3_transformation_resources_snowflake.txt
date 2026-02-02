@@ -1,0 +1,59 @@
+Additional resources on data transformations with Snowflake
+We covered a lot in Module 3. Here are some resources I recommend to learn even more about data transformations with Snowflake:
+
+Data transformations with SQL and Snowpark 
+
+Query Data in Snowflake
+https://docs.snowflake.com/en/guides-overview-queries
+ – You don't need to read everything in this section, but it does a good job of laying out common ways of querying data in Snowflake.
+
+Snowpark for Python | Snowflake Tutorial
+https://youtu.be/udcFnIvXFnE?si=prrOJZd41LO3ITvh
+ by Christopher Marland, Snowflake Data Superhero.
+
+In the video, Christopher uses Jupyter Notebooks, but you can also use Snowflake Notebooks.
+
+Snowpark Developer Guide for Python | Snowflake Documentation
+https://docs.snowflake.com/en/developer-guide/snowpark/python/index
+ – Everything under this section is great. The "Using DataFrames" section is especially helpful and relevant. Browse the Java or Scala sections if those are your preferred programming languages.
+
+Using other Python Packages in Snowpark | by Jeff Hollan | Snowflake Builders Blog
+https://medium.com/snowflake/using-other-python-packages-in-snowpark-a6fd75e4b23a
+ – How to bring in Python packages into a Snowpark development environment.
+
+User-defined functions and stored procedures
+
+User-defined functions overview | Snowflake Documentation
+ https://docs.snowflake.com/en/developer-guide/udf/udf-overview
+
+Snowflake 101: Working with Stored Procedures
+ https://select.dev/posts/snowflake-stored-procedures
+
+Streams
+
+Minor clarification on streams: Querying a stream returns the minimal set of changes from the stream's current offset to the current version of the table. You can query the stream over and over in this way, without affecting the stream's offset (i.e., you'll continue to get the same results). A stream advances the offset only when its contents are consumed. "Consuming", in this context, means specifically using stream contents in a 
+DML
+ transaction. 
+ https://en.wikipedia.org/wiki/Data_manipulation_language
+
+Stream Examples | Snowflake Documentation
+https://docs.snowflake.com/en/user-guide/streams-examples
+ – The parent section "Streams" is excellent for more information on how Streams work "under the hood".
+
+Streaming with Snowflake
+https://www.youtube.com/watch?v=zH5umveQW_c
+ – An excellent technical demo directly from the product manager who helped build Dynamic Tables.
+
+Dynamic Tables
+
+Best practices for dynamic tables | Snowflake Documentation
+https://docs.snowflake.com/en/user-guide/dynamic-tables-best-practices
+
+Getting Started with Snowflake Dynamic Tables
+https://quickstarts.snowflake.com/guide/getting_started_with_dynamic_tables/
+ – (Optional) For more hands-on practice with Snowflake Dynamic Tables.
+
+Snowflake Extension for Visual Studio Code
+
+Snowflake Extension for Visual Studio Code
+ https://docs.snowflake.com/en/user-guide/vscode-ext
