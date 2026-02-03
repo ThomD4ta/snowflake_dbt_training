@@ -1,0 +1,31 @@
+Additional resources on orchestration with Snowflake
+Here are some resources I recommend to learn even more about orchestration with Snowflake:
+
+Introduction to tasks | Snowflake Documentation
+https://docs.snowflake.com/en/user-guide/tasks-intro
+ – A great resource on many different aspects of Snowflake tasks. Consider the section "Triggered Tasks", which outlines new capabilities for tasks.
+
+The definitive guide to using Snowflake Tasks
+https://select.dev/posts/snowflake-tasks
+ – Another great resource written by a Snowflake Data Superhero.
+
+Managing Snowflake tasks and task graphs with Python
+https://docs.snowflake.com/en/developer-guide/snowflake-python-api/snowflake-python-managing-tasks
+ – How to use the Snowflake Python APIs to programmatically manage tasks.
+
+ -----------------------------------------------
+
+ Email integration to send emails to email recipients indicated in the integration
+
+Be sure to specify the email address associated with the Snowflake account you're using in the email integration. This is the easiest way to see the email integration in action (i.e., to send emails).
+
+Otherwise, you can specify an email address associated with an account in your Snowflake organization. Be sure this email address has been verified.
+
+The Snowflake documentation has more details:
+
+Sending email notifications | Snowflake Documentation
+https://docs.snowflake.com/en/user-guide/notifications/email-notifications
+
+CREATE NOTIFICATION INTEGRATION (email) | Snowflake Documentation
+https://docs.snowflake.com/en/sql-reference/sql/create-notification-integration-email#optional-parameters  
+
